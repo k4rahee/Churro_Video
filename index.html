@@ -1600,13 +1600,6 @@
   }
   .modal-card iframe {
     width: 100%; height: 100%; border: none;
-    display: block;
-  }
-  /* iframe height:100% 가 작동하려면 부모 #modalBody 에 명시적 100% 크기 필요 */
-  .modal-card #modalBody {
-    width: 100%;
-    height: 100%;
-    display: block;
   }
   .modal-close {
     position: absolute;
@@ -2092,6 +2085,15 @@
     color: var(--blue-deep);
     letter-spacing: -.045em;
   }
+
+  /* ========== EMBED MODE (when loaded inside iframe via ?embed=1) ========== */
+  html.embed-mode .topbar { display: none; }
+  html.embed-mode .ticker { display: none; }
+  html.embed-mode main { padding-top: 30px; }
+  html.embed-mode section:first-of-type { margin-top: 0; }
+  html.embed-mode .hero { margin-top: 0; }
+  html.embed-mode section { margin-top: 80px; }
+  html.embed-mode .bg-layer { position: absolute; }
 
   /* ========== REVEAL ANIMATIONS ========== */
   .reveal {
@@ -2706,48 +2708,48 @@ const portfolioData = {
     kicker: 'Live Stream',
     title: '방송 하이라이트 편집',
     items: [
-      {title:'방송 하이라이트 01', note:'', src:'drive:1LOz_CUHrfj86Zg6I05A4GSbU-589woam'},
-      {title:'방송 하이라이트 02', note:'', src:'drive:1LOz_CUHrfj86Zg6I05A4GSbU-589woam'},
-      {title:'방송 하이라이트 03', note:'', src:'drive:1LOz_CUHrfj86Zg6I05A4GSbU-589woam'},
-      {title:'방송 하이라이트 04', note:'', src:'drive:1LOz_CUHrfj86Zg6I05A4GSbU-589woam'},
-      {title:'방송 하이라이트 05', note:'', src:'drive:1LOz_CUHrfj86Zg6I05A4GSbU-589woam'},
-      {title:'방송 하이라이트 06', note:'', src:'drive:1LOz_CUHrfj86Zg6I05A4GSbU-589woam'}
+      {title:'오프닝 훅 편집', note:'첫 3초에 시선을 붙잡는 오프닝 구성입니다.', src:'youtube:hs54B0KhB04'},
+      {title:'토크 템포 정리', note:'말맛을 살리면서 호흡을 정리했어요.', src:'youtube:KjrhWvvHbsw'},
+      {title:'리액션 포인트 컷', note:'시청자 반응을 유도하는 리액션 구성.', src:'youtube:fM0MsgsIi_Y'},
+      {title:'하이라이트 모음', note:'핵심 장면을 압축해 재구성했어요.', src:'youtube:rNMruA8YUow'},
+      {title:'합방 · 멀티 편집', note:'여러 소스를 자연스럽게 교차 구성합니다.', src:''},
+      {title:'엔딩 회수형 컷', note:'마무리에 여운을 남기는 구성이에요.', src:''}
     ]
   },
   shorts: {
     kicker: 'Shorts',
     title: '쇼츠 편집',
     items: [
-      {title:'쇼츠 01', note:'', src:'drive:1-l0Zo6tD9NUhmu_Tdjlu9-DBIGSxMmd4'},
-      {title:'쇼츠 02', note:'', src:'drive:12EHpYZoMJTppnzUUgxbTfhwpFeR4slNw'},
-      {title:'쇼츠 03', note:'', src:'drive:1-MMIu1twPXzLYVxoJc5VU4plYaTeembT'},
-      {title:'쇼츠 04', note:'', src:'drive:1rUB484JPYuyXsDvtWZrUgAqRygZgOt3a'},
-      {title:'쇼츠 05', note:'', src:'drive:1e7TDIGii4T6QysHfIKgGmFcYTS0RlKNe'},
-      {title:'쇼츠 06', note:'', src:'drive:1wBqNMBwd7BucCRUKFj6HxVZy2f2xtHlj'}
+      {title:'첫 1초 후킹형', note:'짧고 강한 도입부 구성이에요.', src:'youtube:hkxTqRHh2EE'},
+      {title:'강조 자막형', note:'리듬감 있는 자막 편집.', src:'youtube:CCk7Nwshx90'},
+      {title:'리액션 압축형', note:'짧은 호흡으로 압축한 편집.', src:'youtube:8sBJu9Svqz8'},
+      {title:'썸네일 감성 컷', note:'클릭을 부르는 포인트 컷.', src:'youtube:t0CDYm8bfQ4'},
+      {title:'대사 포인트 편집', note:'핵심 문장을 강조한 편집이에요.', src:'youtube:oqThPoAkMuA'},
+      {title:'루프형 엔딩', note:'재시청을 유도하는 구성.', src:'youtube:HrWZlHKFZII'}
     ]
   },
   animation: {
     kicker: 'Animation',
     title: '애니메이션',
     items: [
-      {title:'애니메이션 01', note:'', src:'drive:1y4Pc8fPgUWTSCXPQ87GP1jqNMFt3CS3X'},
-      {title:'애니메이션 02', note:'', src:'drive:1taBTQS0oi7Dk6zQLJ5W0NVf2cDhW1fbA'},
-      {title:'애니메이션 03', note:'', src:'drive:170G6KV7OUKWvEzENTqVeCZo3Vmik6OfD'},
-      {title:'애니메이션 04', note:'', src:'drive:1HRH7WIAYHTIYZd5-XX4q5gbsKj4hKemp'},
-      {title:'애니메이션 05', note:'', src:'drive:1fP__1ePH5vD1trmkvqY3xT1A4WRxwJ97'},
-      {title:'애니메이션 06', note:'', src:'drive:1FpFjyDby3a7ZxfK8xHWagsUKmYIwpUFO'}
+      {title:'컷 연결 중심 연출', note:'무드를 유지하는 부드러운 컷 연결.', src:'youtube:GoliFPOXZvo'},
+      {title:'장면 전환 샘플', note:'연결감 있는 트랜지션 작업입니다.', src:'youtube:h1tDcFi3wJA'},
+      {title:'캐릭터 무드 편집', note:'감정선을 중심으로 한 편집.', src:'youtube:sAR0rbOnZAY'},
+      {title:'타이포 섞인 구성', note:'리듬감 있는 타이포그래피 연출.', src:'youtube:MbCzqYMyin4'},
+      {title:'BGM 타이밍 작업', note:'음악과 호흡을 맞춘 편집이에요.', src:'youtube:65IqBVrokds'},
+      {title:'시퀀스 강조형', note:'임팩트 있는 시퀀스 연출.', src:'youtube:7VbS8rTMuAs'}
     ]
   },
   branded: {
     kicker: 'Branded · Doc',
     title: '기업광고 · 다큐',
     items: [
-      {title:'기업광고 · 다큐 01', note:'', src:'drive:1C_GH6_TM6uHGKqTk-zCNkGexEGppSs2x'},
-      {title:'기업광고 · 다큐 02', note:'', src:'drive:1IdKZkQ0Mbvl1aW_ayx31JAvhvOpqqg0_'},
-      {title:'기업광고 · 다큐 03', note:'', src:'drive:1vvjJmhqbchNLaZQO6aQoVjEkVgh-y-T-'},
-      {title:'기업광고 · 다큐 04', note:'', src:'drive:1BohcXjD9xFONmc2kCi5JJP-GPvYmKhV2'},
-      {title:'기업광고 · 다큐 05', note:'', src:'drive:184Sbk2USY7Nu2k7fHJWdgJhQOv3yNA2e'},
-      {title:'기업광고 · 다큐 06', note:'', src:'drive:1C0zs7t4Dmmuew8HzY5oeUF8Rc8ji4kYf'}
+      {title:'브랜드 소개 영상', note:'기업 아이덴티티를 담은 구성입니다.', src:'youtube:5RNnnR1rgsk'},
+      {title:'제품 홍보 컷', note:'제품의 매력을 강조한 편집이에요.', src:'youtube:vg-nFcRi9fs'},
+      {title:'서비스 스토리', note:'서비스 가치를 전달하는 내러티브.', src:'youtube:4nBtCJboyh4'},
+      {title:'인터뷰 다큐', note:'인물 중심의 다큐멘터리 편집입니다.', src:'youtube:AP1s6OfsCv4'},
+      {title:'현장 기록 다큐', note:'현장의 공기를 담은 편집이에요.', src:'youtube:wkpODfcpG88'},
+      {title:'브랜드 캠페인', note:'캠페인 메시지를 살린 편집입니다.', src:'youtube:Pm3aVvW_fPM'}
     ]
   }
 };
@@ -3187,46 +3189,15 @@ updateRangeProgress();
 updateEstimate();
 updateActiveNav();
 
-/* ==================== IFRAME EMBED 대응 ==================== */
-/* Artmug 등 iframe 안에서 실행될 때 부모에게 높이 알림 + 모달 스크롤 보정 */
-const isEmbedded = (function(){ try { return window.self !== window.top; } catch(e){ return true; } })();
-if (isEmbedded) {
-  /* 1) 부모 창에 현재 높이 전달 (호스트가 리스닝하면 자동 리사이즈) */
-  const reportHeight = () => {
-    try {
-      const h = Math.max(
-        document.documentElement.scrollHeight,
-        document.body.scrollHeight
-      );
-      window.parent.postMessage({ type: 'churro-height', height: h }, '*');
-    } catch(e){}
-  };
-  window.addEventListener('load', reportHeight);
-  window.addEventListener('resize', reportHeight);
-  if (window.ResizeObserver) new ResizeObserver(reportHeight).observe(document.body);
-  setInterval(reportHeight, 1500);
-
-  /* 2) 모달 열릴 때 iframe 가시 영역으로 스크롤 (position:fixed가 iframe 뷰포트 기준이라 생기는 문제 완화) */
-  const origOpenModal = window.openModal || null;
-  const wrapOpen = () => {
-    try {
-      modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      try { window.parent.postMessage({ type: 'churro-modal-open' }, '*'); } catch(e){}
-    } catch(e){}
-  };
-  /* openModal 호출 직후 스크롤 보정 */
-  const _open = openModal;
-  window.openModal = function(item){
-    _open(item);
-    requestAnimationFrame(wrapOpen);
-  };
-  /* 이미 바인딩된 이벤트들이 _open이 아닌 openModal 참조를 써야 해서,
-     위 방식 대신 click 이벤트 시점에 직접 스크롤 트리거 */
-  document.addEventListener('click', (e) => {
-    const card = e.target.closest && e.target.closest('.portfolio-card, .portfolio-feature');
-    if (card) requestAnimationFrame(() => { if (modal.classList.contains('open')) wrapOpen(); });
-  }, true);
-}
+/* ==================== EMBED MODE (?embed=1) ==================== */
+// When loaded inside an iframe with ?embed=1, hide topbar/ticker so the page
+// flows naturally inside the parent page without fixed nav or duplicated scroll UX.
+(function initEmbedMode(){
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('embed') === '1') {
+    document.documentElement.classList.add('embed-mode');
+  }
+})();
 </script>
 </body>
 </html>
