@@ -982,6 +982,31 @@
     transform: scale(1.05);
     filter: saturate(1) brightness(1.02);
   }
+  .portfolio-feature.vertical .portfolio-feature-bg {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #050914;
+  }
+  .portfolio-feature.empty {
+    cursor: default;
+  }
+  .portfolio-feature.empty .play-btn {
+    display: none;
+  }
+  .portfolio-feature-bg.empty-thumb,
+  .portfolio-card .thumb.empty-thumb {
+    background-image: linear-gradient(135deg, rgba(13,22,48,.92), rgba(42,79,204,.35)) !important;
+    background-size: cover;
+    background-position: center;
+  }
+  .portfolio-card.empty {
+    cursor: default;
+    opacity: .58;
+  }
+  .portfolio-card.empty:hover {
+    transform: none;
+    box-shadow: none;
+  }
   .portfolio-card::after {
     content: "";
     position: absolute; inset: 0;
@@ -1585,7 +1610,8 @@
     to { opacity: 1; }
   }
   .modal-card {
-    width: min(860px, 100%);
+    width: min(960px, calc(100vw - 40px));
+    max-height: calc(100vh - 96px);
     aspect-ratio: 16/9;
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -1594,11 +1620,23 @@
     box-shadow: 0 40px 80px rgba(0,0,0,.5);
     animation: modalRise .5s var(--ease-out);
   }
+  .modal-card.is-vertical {
+    width: min(430px, calc(100vw - 40px));
+    aspect-ratio: 9/16;
+  }
+  .modal-card.is-horizontal {
+    aspect-ratio: 16/9;
+  }
+  #modalBody {
+    width: 100%;
+    height: 100%;
+  }
   @keyframes modalRise {
     from { opacity: 0; transform: translateY(20px) scale(.98); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
   .modal-card iframe {
+    display: block;
     width: 100%; height: 100%; border: none;
   }
   .modal-close {
@@ -2720,22 +2758,22 @@ const portfolioData = {
     kicker: 'Shorts',
     title: '쇼츠 편집',
     items: [
-      {title:'첫 1초 후킹형', note:'짧고 강한 도입부 구성이에요.', src:'youtube:hkxTqRHh2EE'},
-      {title:'강조 자막형', note:'리듬감 있는 자막 편집.', src:'youtube:CCk7Nwshx90'},
-      {title:'리액션 압축형', note:'짧은 호흡으로 압축한 편집.', src:'youtube:8sBJu9Svqz8'},
-      {title:'썸네일 감성 컷', note:'클릭을 부르는 포인트 컷.', src:'youtube:t0CDYm8bfQ4'},
-      {title:'대사 포인트 편집', note:'핵심 문장을 강조한 편집이에요.', src:'youtube:oqThPoAkMuA'},
-      {title:'루프형 엔딩', note:'재시청을 유도하는 구성.', src:'youtube:HrWZlHKFZII'}
+      {title:'첫 1초 후킹형', note:'짧고 강한 도입부 구성이에요.', src:'youtube:hkxTqRHh2EE', ratio:'vertical'},
+      {title:'강조 자막형', note:'리듬감 있는 자막 편집.', src:'youtube:CCk7Nwshx90', ratio:'vertical'},
+      {title:'리액션 압축형', note:'짧은 호흡으로 압축한 편집.', src:'youtube:8sBJu9Svqz8', ratio:'vertical'},
+      {title:'썸네일 감성 컷', note:'클릭을 부르는 포인트 컷.', src:'youtube:t0CDYm8bfQ4', ratio:'vertical'},
+      {title:'대사 포인트 편집', note:'핵심 문장을 강조한 편집이에요.', src:'youtube:oqThPoAkMuA', ratio:'vertical'},
+      {title:'루프형 엔딩', note:'재시청을 유도하는 구성.', src:'youtube:HrWZlHKFZII', ratio:'vertical'}
     ]
   },
   animation: {
     kicker: 'Animation',
     title: '애니메이션',
     items: [
-      {title:'컷 연결 중심 연출', note:'무드를 유지하는 부드러운 컷 연결.', src:'youtube:GoliFPOXZvo'},
-      {title:'장면 전환 샘플', note:'연결감 있는 트랜지션 작업입니다.', src:'youtube:h1tDcFi3wJA'},
-      {title:'캐릭터 무드 편집', note:'감정선을 중심으로 한 편집.', src:'youtube:sAR0rbOnZAY'},
-      {title:'타이포 섞인 구성', note:'리듬감 있는 타이포그래피 연출.', src:'youtube:MbCzqYMyin4'},
+      {title:'컷 연결 중심 연출', note:'무드를 유지하는 부드러운 컷 연결.', src:'youtube:GoliFPOXZvo', ratio:'vertical'},
+      {title:'장면 전환 샘플', note:'연결감 있는 트랜지션 작업입니다.', src:'youtube:h1tDcFi3wJA', ratio:'vertical'},
+      {title:'캐릭터 무드 편집', note:'감정선을 중심으로 한 편집.', src:'youtube:sAR0rbOnZAY', ratio:'vertical'},
+      {title:'타이포 섞인 구성', note:'리듬감 있는 타이포그래피 연출.', src:'youtube:MbCzqYMyin4', ratio:'vertical'},
       {title:'BGM 타이밍 작업', note:'음악과 호흡을 맞춘 편집이에요.', src:'youtube:65IqBVrokds'},
       {title:'시퀀스 강조형', note:'임팩트 있는 시퀀스 연출.', src:'youtube:7VbS8rTMuAs'}
     ]
@@ -2747,29 +2785,112 @@ const portfolioData = {
       {title:'브랜드 소개 영상', note:'기업 아이덴티티를 담은 구성입니다.', src:'youtube:5RNnnR1rgsk'},
       {title:'제품 홍보 컷', note:'제품의 매력을 강조한 편집이에요.', src:'youtube:vg-nFcRi9fs'},
       {title:'서비스 스토리', note:'서비스 가치를 전달하는 내러티브.', src:'youtube:4nBtCJboyh4'},
-      {title:'인터뷰 다큐', note:'인물 중심의 다큐멘터리 편집입니다.', src:'youtube:AP1s6OfsCv4'},
+      {title:'인터뷰 다큐', note:'인물 중심의 다큐멘터리 편집입니다.', src:'youtube:AP1s6OfsCv4', ratio:'vertical'},
       {title:'현장 기록 다큐', note:'현장의 공기를 담은 편집이에요.', src:'youtube:wkpODfcpG88'},
       {title:'브랜드 캠페인', note:'캠페인 메시지를 살린 편집입니다.', src:'youtube:Pm3aVvW_fPM'}
     ]
   }
 };
 function parseMedia(src){
-  if (!src) return { thumb:'', embed:'' };
+  if (!src) return { thumb:'', embed:'', candidates:[], type:'empty' };
   if (src.startsWith('youtube:')) {
     const id = src.slice(8);
+    const candidates = [
+      `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+      `https://i.ytimg.com/vi/${id}/sddefault.jpg`,
+      `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+      `https://i.ytimg.com/vi/${id}/mqdefault.jpg`
+    ];
     return {
-      thumb: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
-      embed: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`
+      thumb: candidates[0],
+      candidates,
+      embed: `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`,
+      type: 'youtube'
     };
   }
   if (src.startsWith('drive:')) {
     const id = src.slice(6);
     return {
       thumb: `https://drive.google.com/thumbnail?id=${id}&sz=w1280`,
-      embed: `https://drive.google.com/file/d/${id}/preview`
+      candidates: [`https://drive.google.com/thumbnail?id=${id}&sz=w1280`],
+      embed: `https://drive.google.com/file/d/${id}/preview`,
+      type: 'drive'
     };
   }
-  return { thumb:'', embed:'' };
+  return { thumb:'', embed:'', candidates:[], type:'empty' };
+}
+
+function hasPlayableMedia(item){
+  return !!parseMedia(item && item.src).embed;
+}
+
+function mediaRatio(item){
+  return item && item.ratio === 'vertical' ? 'vertical' : 'horizontal';
+}
+
+function applyMediaRatio(el, item){
+  const ratio = mediaRatio(item);
+  el.classList.toggle('vertical', ratio === 'vertical');
+  el.classList.toggle('horizontal', ratio !== 'vertical');
+}
+
+const thumbnailCache = new Map();
+function safeCssUrl(url){
+  return 'url(\"' + String(url).replace(/\"/g, '\\"') + '\")';
+}
+function setMediaThumbnail(el, item){
+  const media = parseMedia(item && item.src);
+  el.classList.remove('empty-thumb');
+  if (!media.thumb) {
+    el.dataset.thumbKey = '';
+    el.style.backgroundImage = '';
+    el.classList.add('empty-thumb');
+    return;
+  }
+
+  const cacheKey = item.src;
+  el.dataset.thumbKey = cacheKey;
+  const cached = thumbnailCache.get(cacheKey);
+  if (cached) {
+    el.style.backgroundImage = safeCssUrl(cached);
+    return;
+  }
+
+  const candidates = media.candidates && media.candidates.length ? media.candidates : [media.thumb];
+  let idx = 0;
+  const tryNext = () => {
+    const url = candidates[idx];
+    if (!url) {
+      if (el.dataset.thumbKey !== cacheKey) return;
+      el.style.backgroundImage = '';
+      el.classList.add('empty-thumb');
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      const looksLikeYoutubePlaceholder = media.type === 'youtube' && idx < candidates.length - 1 && (img.naturalWidth <= 160 || img.naturalHeight <= 100);
+      if (looksLikeYoutubePlaceholder) {
+        idx += 1;
+        tryNext();
+        return;
+      }
+      if (el.dataset.thumbKey !== cacheKey) return;
+      thumbnailCache.set(cacheKey, url);
+      el.style.backgroundImage = safeCssUrl(url);
+    };
+    img.onerror = () => {
+      idx += 1;
+      tryNext();
+    };
+    img.src = url;
+  };
+  tryNext();
+}
+
+function firstPlayableIndex(catKey){
+  const items = portfolioData[catKey].items;
+  const found = items.findIndex(hasPlayableMedia);
+  return found >= 0 ? found : 0;
 }
 const categoryOrder = ['broadcast','shorts','animation','branded'];
 const labels = {
@@ -2833,7 +2954,13 @@ function pauseAutoplay() {
 
 function advancePortfolio(delta) {
   const items = portfolioData[activePortfolioCat].items;
-  activePortfolioIndex = (activePortfolioIndex + delta + items.length) % items.length;
+  for (let step = 1; step <= items.length; step += 1) {
+    const nextIndex = (activePortfolioIndex + delta * step + items.length) % items.length;
+    if (hasPlayableMedia(items[nextIndex])) {
+      activePortfolioIndex = nextIndex;
+      break;
+    }
+  }
   renderPortfolioStage(true);
 }
 
@@ -2852,7 +2979,7 @@ function renderPortfolioCats(){
     btn.addEventListener('click', () => {
       if (activePortfolioCat === key) return;
       activePortfolioCat = key;
-      activePortfolioIndex = 0;
+      activePortfolioIndex = firstPlayableIndex(key);
       renderPortfolioCats();
       renderPortfolioStage(true, true);
     });
@@ -2881,11 +3008,14 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
 
   portfolioKicker.textContent = group.kicker;
   portfolioFeatureTag.textContent = `#${String(activePortfolioIndex + 1).padStart(2, "0")}`;
-  portfolioFeatureBg.style.backgroundImage = `url('${parseMedia(current.src).thumb}')`;
+  portfolioFeature.classList.toggle('empty', !hasPlayableMedia(current));
+  applyMediaRatio(portfolioFeature, current);
+  setMediaThumbnail(portfolioFeatureBg, current);
 
   counterTotal.textContent = String(group.items.length).padStart(2, '0');
   bumpCounter();
 
+  portfolioFeature.setAttribute('aria-disabled', hasPlayableMedia(current) ? 'false' : 'true');
   portfolioFeature.onclick = () => openModal(current);
   portfolioFeature.onkeydown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -2898,18 +3028,21 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
   group.items.forEach((item, idx) => {
     const card = document.createElement('button');
     card.type = 'button';
-    card.className = 'portfolio-card' + (idx === activePortfolioIndex ? ' active' : '');
+    card.className = 'portfolio-card' + (idx === activePortfolioIndex ? ' active' : '') + (!hasPlayableMedia(item) ? ' empty' : '');
     if (categoryChanged) card.classList.add('enter');
     card.style.animationDelay = categoryChanged ? (idx * 0.07) + 's' : '';
     card.setAttribute('aria-label', `${item.title} 선택`);
+    card.setAttribute('aria-disabled', hasPlayableMedia(item) ? 'false' : 'true');
     card.innerHTML = `
-      <div class="thumb" style="background-image:url('${parseMedia(item.src).thumb}')"></div>
+      <div class="thumb"></div>
       <span class="idx">#${String(idx + 1).padStart(2, '0')}</span>
     `;
+    setMediaThumbnail(card.querySelector('.thumb'), item);
 
     // Click: select or open
     card.addEventListener('click', (e) => {
       e.stopPropagation();
+      if (!hasPlayableMedia(item)) return;
       if (idx === activePortfolioIndex) {
         openModal(item);
       } else {
@@ -2921,7 +3054,7 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
 
     // Hover: preview in featured slot (no commit)
     card.addEventListener('mouseenter', () => {
-      if (idx === activePortfolioIndex) return;
+      if (idx === activePortfolioIndex || !hasPlayableMedia(item)) return;
       card.classList.add('preview');
       previewFeatureItem(item);
       pauseAutoplay();
@@ -2940,12 +3073,14 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
 
 /* Preview helpers (hover on thumb shows different image without changing state) */
 function previewFeatureItem(item){
-  portfolioFeatureBg.style.backgroundImage = `url('${parseMedia(item.src).thumb}')`;
+  applyMediaRatio(portfolioFeature, item);
+  setMediaThumbnail(portfolioFeatureBg, item);
 }
 function restoreActiveItem(){
   const group = portfolioData[activePortfolioCat];
   const current = group.items[activePortfolioIndex];
-  portfolioFeatureBg.style.backgroundImage = `url('${parseMedia(current.src).thumb}')`;
+  applyMediaRatio(portfolioFeature, current);
+  setMediaThumbnail(portfolioFeatureBg, current);
 }
 
 /* Pause/resume autoplay on feature hover too */
@@ -2956,13 +3091,20 @@ portfolioFeature.addEventListener('mouseleave', () => {
 
 /* ==================== MODAL ==================== */
 const modal = document.getElementById('videoModal');
+const modalCard = modal.querySelector('.modal-card');
 const modalBody = document.getElementById('modalBody');
 document.getElementById('closeModal').addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 
 function openModal(item){
-  const { embed } = parseMedia(item.src);
-  modalBody.innerHTML = `<iframe src="${embed}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`;
+  const { embed } = parseMedia(item && item.src);
+  if (!embed) {
+    showToast('등록된 영상 링크가 없습니다');
+    return;
+  }
+  modalCard.classList.toggle('is-vertical', mediaRatio(item) === 'vertical');
+  modalCard.classList.toggle('is-horizontal', mediaRatio(item) !== 'vertical');
+  modalBody.innerHTML = `<iframe src="${embed}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
   modal.classList.add('open');
   modal.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
@@ -2971,6 +3113,7 @@ function closeModal(){
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden','true');
   modalBody.innerHTML = '';
+  modalCard.classList.remove('is-vertical', 'is-horizontal');
   document.body.style.overflow = '';
 }
 window.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
