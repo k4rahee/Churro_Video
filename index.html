@@ -779,6 +779,10 @@
     overflow: hidden;
   }
   .portfolio-inline-player.open { display: flex; }
+  html.embed-mode .portfolio-inline-player {
+    position: absolute;
+    inset: 0;
+  }
   .portfolio-inline-frame {
     width: 100%;
     height: 100%;
@@ -2223,13 +2227,42 @@
   }
 
   /* ========== EMBED MODE (when loaded inside iframe via ?embed=1) ========== */
-  html.embed-mode .topbar { display: none; }
+  html.embed-mode .topbar {
+    display: block !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
+  }
   html.embed-mode .ticker { display: none; }
   html.embed-mode main { padding-top: 30px; }
   html.embed-mode section:first-of-type { margin-top: 0; }
   html.embed-mode .hero { margin-top: 0; }
   html.embed-mode section { margin-top: 80px; }
   html.embed-mode .bg-layer { position: absolute; }
+
+  /* Keep the desktop navigation visible inside external iframes.
+     Without this override, the iframe width can trigger the mobile breakpoint
+     and hide the nav links behind the hamburger button. */
+  html.embed-mode .nav {
+    display: flex !important;
+    position: static !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    width: auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+  html.embed-mode .nav-mobile-btn { display: none !important; }
+  html.embed-mode .topbar-inner {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  html.embed-mode .topbar-inner::-webkit-scrollbar { display: none; }
+  html.embed-mode #videoModal { display: none !important; }
 
   /* ========== REVEAL ANIMATIONS ========== */
   .reveal {
@@ -3152,18 +3185,14 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
     `;
     setMediaThumbnail(card.querySelector('.thumb'), item);
 
-    // Click: select or open
+    // Click: select and play immediately inside the featured portfolio area
     card.addEventListener('click', (e) => {
       e.stopPropagation();
       if (!hasPlayableMedia(item)) return;
-      if (idx === activePortfolioIndex) {
-        openModal(item);
-      } else {
-        closePortfolioPlayer(false);
-        activePortfolioIndex = idx;
-        renderPortfolioStage(true);
-        startAutoplay();
-      }
+      closePortfolioPlayer(false);
+      activePortfolioIndex = idx;
+      renderPortfolioStage(true);
+      window.setTimeout(() => openModal(item), 0);
     });
 
     // Hover: preview in featured slot (no commit)
@@ -3246,8 +3275,6 @@ function openModal(item){
     e.stopPropagation();
     closePortfolioPlayer(true);
   });
-
-  portfolioFeature.scrollIntoView({ block: 'center', behavior: 'smooth' });
 }
 
 function closePortfolioPlayer(resume = true){
@@ -3487,8 +3514,8 @@ updateEstimate();
 updateActiveNav();
 
 /* ==================== EMBED MODE (?embed=1) ==================== */
-// When loaded inside an iframe with ?embed=1, hide topbar/ticker so the page
-// flows naturally inside the parent page without fixed nav or duplicated scroll UX.
+// When loaded inside an iframe with ?embed=1, keep the top navigation visible
+// while hiding only the ticker to reduce duplicated vertical space.
 (function initEmbedMode(){
   const params = new URLSearchParams(window.location.search);
   if (params.get('embed') === '1') {
