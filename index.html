@@ -48,7 +48,8 @@
 
   /* ========== RESET ========== */
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; background: var(--bg); }
+  html, body { background-color: var(--bg); }
   body {
     margin: 0;
     font-family: var(--font-body);
@@ -2646,7 +2647,7 @@
             <div class="result-box">
               <h3>예상 견적 내역</h3>
               <div class="calc-row"><span>선택 카테고리</span><strong id="calcCategory">방송 하이라이트</strong></div>
-              <div class="calc-row"><span>분당 단가</span><strong id="calcRate">15,000원</strong></div>
+              <div class="calc-row"><span>분당 단가</span><strong id="calcRate">10,000원</strong></div>
               <div class="calc-row"><span>기본 금액</span><strong id="calcBase">45,000원</strong></div>
               <div class="calc-row"><span>포트폴리오 비공개</span><strong id="calcPrivate">0원</strong></div>
               <div class="calc-row"><span>우선 작업</span><strong id="calcPriority">0원</strong></div>
@@ -2890,7 +2891,7 @@ const portfolioData = {
     kicker: 'Shorts',
     title: '쇼츠 편집',
     items: [
-      {title:'첫 1초 후킹형', note:'짧고 강한 도입부 구성이에요.', src:'youtube:hkxTqRHh2EE', ratio:'vertical'},
+      {title:'첫 1초 후킹형', note:'짧고 강한 도입부 구성이에요.', src:'youtube:OFvi6XFQ-fI', ratio:'vertical'},
       {title:'강조 자막형', note:'리듬감 있는 자막 편집.', src:'youtube:CCk7Nwshx90', ratio:'vertical'},
       {title:'리액션 압축형', note:'짧은 호흡으로 압축한 편집.', src:'youtube:8sBJu9Svqz8', ratio:'vertical'},
       {title:'썸네일 감성 컷', note:'클릭을 부르는 포인트 컷.', src:'youtube:t0CDYm8bfQ4', ratio:'vertical'},
@@ -3039,8 +3040,8 @@ function firstPlayableIndex(catKey){
 }
 const categoryOrder = ['broadcast','shorts','animation','branded'];
 const labels = {
-  broadcast:{title:'방송 하이라이트', desc:'분당 15,000원', index:'01'},
-  shorts:{title:'쇼츠 편집', desc:'분당 12,000원', index:'02'},
+  broadcast:{title:'방송 하이라이트', desc:'분당 10,000원', index:'01'},
+  shorts:{title:'쇼츠 편집', desc:'분당 20,000원', index:'02'},
   animation:{title:'애니메이션', desc:'분당 50,000원', index:'03'},
   branded:{title:'기업광고 · 다큐', desc:'협의', index:'04'}
 };
@@ -3301,9 +3302,9 @@ window.addEventListener('keydown', e => {
 
 /* ==================== ESTIMATE CALCULATOR ==================== */
 const categories = [
-  { key:'broadcast', name:'방송 하이라이트', rate:15000 },
+  { key:'broadcast', name:'방송 하이라이트', rate:10000 },
   { key:'animation', name:'애니메이션', rate:50000 },
-  { key:'shorts', name:'쇼츠 편집', rate:12000 },
+  { key:'shorts', name:'쇼츠 편집', rate:20000 },
   { key:'branded', name:'기업광고 · 다큐', rate:null }
 ];
 let currentCategory = categories[0];
@@ -3521,6 +3522,29 @@ updateActiveNav();
   if (params.get('embed') === '1') {
     document.documentElement.classList.add('embed-mode');
   }
+})();
+</script>
+
+<script>
+/* IFRAME HEIGHT SYNC: prevents parent page white gaps when this page is embedded */
+(function(){
+  function sendChurroHeight(){
+    var height = Math.max(
+      document.body ? document.body.scrollHeight : 0,
+      document.documentElement ? document.documentElement.scrollHeight : 0,
+      document.body ? document.body.offsetHeight : 0,
+      document.documentElement ? document.documentElement.offsetHeight : 0
+    );
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'CHURRO_HEIGHT', height: height + 24 }, '*');
+    }
+  }
+  window.addEventListener('load', sendChurroHeight);
+  window.addEventListener('resize', sendChurroHeight);
+  document.addEventListener('DOMContentLoaded', sendChurroHeight);
+  setTimeout(sendChurroHeight, 300);
+  setTimeout(sendChurroHeight, 1000);
+  setTimeout(sendChurroHeight, 2500);
 })();
 </script>
 </body>
