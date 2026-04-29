@@ -12,22 +12,22 @@
 <style>
   /* ========== TOKENS ========== */
   :root{
-    --bg: #f6f0e3;
-    --bg-warm: #fbf8f2;
+    --bg: #ffffff;
+    --bg-warm: #ffffff;
     --ink: #0f1a35;
     --ink-soft: #1d2a4b;
     --sub: #4a5876;
     --sub-2: #6d7a95;
-    --line: rgba(180,150,90,.22);
-    --line-strong: rgba(156,124,70,.36);
+    --line: rgba(77,124,255,.16);
+    --line-strong: rgba(77,124,255,.28);
     --blue: #4d7cff;
     --blue-deep: #2a4fcc;
     --blue-soft: #eaf1ff;
     --blue-glow: rgba(77,124,255,.28);
-    --sand: #f3ead7;
-    --sand-deep: #d4b875;
-    --sand-ink: #6b5220;
-    --cream: #faf4e4;
+    --sand: #eef4ff;
+    --sand-deep: #7fa0ff;
+    --sand-ink: #2a4fcc;
+    --cream: #ffffff;
     --cream-deep: #ecdeb8;
     --panel: rgba(255,253,247,.82);
     --panel-strong: rgba(255,253,247,.94);
@@ -278,7 +278,7 @@
     width: 360px; height: 360px;
     left: -120px; bottom: -160px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(243,234,215,.7), transparent 70%);
+    background: radial-gradient(circle, rgba(77,124,255,.10), transparent 70%);
     z-index: -1;
     animation: heroBlobFloat 18s ease-in-out infinite reverse;
   }
@@ -1832,7 +1832,7 @@
     padding: 52px 24px 20px;
     border-radius: 18px;
     background:
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,214,163,.24), transparent 70%),
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,207,107,.16), transparent 70%),
       linear-gradient(175deg, #1e3282 0%, #2a4fcc 70%, #3a65e0 100%);
     color: #fff;
     box-shadow:
@@ -2324,6 +2324,22 @@
     }
     .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
   }
+
+/* Title/description highlight color sync: restored old soft highlight */
+.hero-title mark,
+.hero-title .highlight,
+.hero-title .accent,
+.hero-title strong,
+.hero h1 mark,
+.hero h1 .highlight,
+.hero h1 .accent,
+.hero h1 strong,
+.hero-sub strong {
+  background: linear-gradient(180deg, transparent 62%, rgba(243,234,215,.7) 62%) !important;
+  color: inherit;
+  border-radius: .12em;
+}
+
 </style>
 </head>
 <body>
@@ -2670,17 +2686,17 @@
             <div class="result-box">
               <h3>예상 견적 내역</h3>
               <div class="calc-row"><span>선택 카테고리</span><strong id="calcCategory">방송 하이라이트</strong></div>
-              <div class="calc-row"><span>분당 단가</span><strong id="calcRate">10,000원</strong></div>
-              <div class="calc-row"><span>기본 금액</span><strong id="calcBase">45,000원</strong></div>
+              <div class="calc-row"><span>단가</span><strong id="calcRate">10,000원 / 분</strong></div>
+              <div class="calc-row"><span>기본 금액</span><strong id="calcBase">30,000원</strong></div>
               <div class="calc-row"><span>포트폴리오 비공개</span><strong id="calcPrivate">0원</strong></div>
               <div class="calc-row"><span>우선 작업</span><strong id="calcPriority">0원</strong></div>
-              <div class="calc-row discount"><span>FIRSTCUST 쿠폰</span><strong id="calcCoupon">-9,000원</strong></div>
+              <div class="calc-row discount"><span>FIRSTCUST 쿠폰</span><strong id="calcCoupon">-6,000원</strong></div>
             </div>
             <div class="final-total">
               <div>
                 <span class="label">Estimated Total</span>
               </div>
-              <div class="amount"><span id="calcFinal">36,000</span><span class="won">원</span></div>
+              <div class="amount"><span id="calcFinal">24,000</span><span class="won">원</span></div>
             </div>
           </aside>
         </div>
@@ -2716,9 +2732,8 @@
               <label for="formType">작업 종류</label>
               <select id="formType">
                 <option>방송 하이라이트</option>
-                <option>쇼츠 편집</option>
-                <option>애니메이션</option>
-                <option>기업광고 · 다큐</option>
+                <option>쇼츠</option>
+                <option>그외(문의)</option>
               </select>
             </div>
             <div class="form-field">
@@ -2822,7 +2837,7 @@ window.addEventListener('scroll', updateActiveNav, { passive: true });
 const tickerItems = [
   { en: 'Live Stream Highlight', ko: '방송 하이라이트' },
   { en: 'Animation', ko: '애니메이션' },
-  { en: 'Shorts Edit', ko: '쇼츠 편집' },
+  { en: 'Shorts Edit', ko: '쇼츠' },
   { en: 'Branded · Documentary', ko: '기업광고 · 다큐' },
   { en: 'Hook-first Pacing', ko: '첫 3초 후킹' },
   { en: 'Reaction-driven', ko: '리액션 중심' },
@@ -2900,7 +2915,7 @@ tiltCards.forEach(card => {
 const portfolioData = {
   broadcast: {
     kicker: 'Live Stream',
-    title: '방송 하이라이트 편집',
+    title: '방송 하이라이트',
     items: [
       {title:'오프닝 훅 편집', note:'첫 3초에 시선을 붙잡는 오프닝 구성입니다.', src:''},
       {title:'토크 템포 정리', note:'말맛을 살리면서 호흡을 정리했어요.', src:''},
@@ -2912,7 +2927,7 @@ const portfolioData = {
   },
   shorts: {
     kicker: 'Shorts',
-    title: '쇼츠 편집',
+    title: '쇼츠',
     items: [
       {title:'첫 1초 후킹형', note:'짧고 강한 도입부 구성이에요.', src:'', ratio:'vertical'},
       {title:'강조 자막형', note:'리듬감 있는 자막 편집.', src:'', ratio:'vertical'},
@@ -2922,28 +2937,16 @@ const portfolioData = {
       {title:'루프형 엔딩', note:'재시청을 유도하는 구성.', src:'', ratio:'vertical'}
     ]
   },
-  animation: {
-    kicker: 'Animation',
-    title: '애니메이션',
+  other: {
+    kicker: 'Custom',
+    title: '그외(문의)',
     items: [
-      {title:'컷 연결 중심 연출', note:'무드를 유지하는 부드러운 컷 연결.', src:'', ratio:'vertical'},
-      {title:'장면 전환 샘플', note:'연결감 있는 트랜지션 작업입니다.', src:'', ratio:'vertical'},
-      {title:'캐릭터 무드 편집', note:'감정선을 중심으로 한 편집.', src:'', ratio:'vertical'},
-      {title:'타이포 섞인 구성', note:'리듬감 있는 타이포그래피 연출.', src:'', ratio:'vertical'},
-      {title:'BGM 타이밍 작업', note:'음악과 호흡을 맞춘 편집이에요.', src:''},
-      {title:'시퀀스 강조형', note:'임팩트 있는 시퀀스 연출.', src:''}
-    ]
-  },
-  branded: {
-    kicker: 'Branded · Doc',
-    title: '기업광고 · 다큐',
-    items: [
-      {title:'브랜드 소개 영상', note:'기업 아이덴티티를 담은 구성입니다.', src:''},
-      {title:'제품 홍보 컷', note:'제품의 매력을 강조한 편집이에요.', src:''},
-      {title:'서비스 스토리', note:'서비스 가치를 전달하는 내러티브.', src:''},
-      {title:'인터뷰 다큐', note:'인물 중심의 다큐멘터리 편집입니다.', src:'', ratio:'vertical'},
-      {title:'현장 기록 다큐', note:'현장의 공기를 담은 편집이에요.', src:''},
-      {title:'브랜드 캠페인', note:'캠페인 메시지를 살린 편집입니다.', src:''}
+      {title:'애니메이션 편집', note:'무드와 장면 흐름에 맞춰 별도 견적 협의가 필요합니다.', src:'', ratio:'vertical'},
+      {title:'기업광고 · 다큐', note:'브랜드 목적과 분량에 따라 가격을 협의합니다.', src:''},
+      {title:'뮤직비디오/무드 영상', note:'레퍼런스와 연출 강도에 따라 별도 상담합니다.', src:''},
+      {title:'장기 프로젝트', note:'반복 납품이나 패키지 작업은 일정과 범위를 먼저 맞춥니다.', src:''},
+      {title:'특수 효과 편집', note:'효과 밀도와 작업량에 따라 견적이 달라집니다.', src:''},
+      {title:'기타 문의', note:'카테고리에 없는 작업은 문의 후 진행합니다.', src:''}
     ]
   }
 };
@@ -3061,12 +3064,11 @@ function firstPlayableIndex(catKey){
   const found = items.findIndex(hasPlayableMedia);
   return found >= 0 ? found : 0;
 }
-const categoryOrder = ['broadcast','shorts','animation','branded'];
+const categoryOrder = ['broadcast','shorts','other'];
 const labels = {
   broadcast:{title:'방송 하이라이트', desc:'분당 10,000원', index:'01'},
-  shorts:{title:'쇼츠 편집', desc:'분당 20,000원', index:'02'},
-  animation:{title:'애니메이션', desc:'분당 50,000원', index:'03'},
-  branded:{title:'기업광고 · 다큐', desc:'협의', index:'04'}
+  shorts:{title:'쇼츠', desc:'건당 20,000원', index:'02'},
+  other:{title:'그외(문의)', desc:'가격 협의', index:'03'}
 };
 let activePortfolioCat = 'broadcast';
 let activePortfolioIndex = 0;
@@ -3327,10 +3329,9 @@ window.addEventListener('keydown', e => {
 
 /* ==================== ESTIMATE CALCULATOR ==================== */
 const categories = [
-  { key:'broadcast', name:'방송 하이라이트', rate:10000 },
-  { key:'animation', name:'애니메이션', rate:50000 },
-  { key:'shorts', name:'쇼츠 편집', rate:20000 },
-  { key:'branded', name:'기업광고 · 다큐', rate:null }
+  { key:'broadcast', name:'방송 하이라이트', rate:10000, unit:'minute' },
+  { key:'shorts', name:'쇼츠', rate:20000, unit:'case' },
+  { key:'other', name:'그외(문의)', rate:null, unit:'negotiable' }
 ];
 let currentCategory = categories[0];
 let couponApplied = true;
@@ -3353,7 +3354,7 @@ function renderCategories(){
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'cat-btn' + (cat.key === currentCategory.key ? ' active' : '');
-    const rateText = cat.rate == null ? '협의' : `${formatWon(cat.rate)} · 분당`;
+    const rateText = cat.rate == null ? '가격 협의' : (cat.unit === 'case' ? `${formatWon(cat.rate)} · 건당` : `${formatWon(cat.rate)} · 분당`);
     btn.innerHTML = `<strong>${cat.name}</strong><span>${rateText}</span>`;
     btn.addEventListener('click', () => {
       currentCategory = cat;
@@ -3426,14 +3427,14 @@ function updateEstimate(){
     return;
   }
 
-  const base = minutes * currentCategory.rate;
+  const base = currentCategory.unit === 'case' ? currentCategory.rate : minutes * currentCategory.rate;
   const privateCost = privateWork.checked ? 25000 : 0;
   const priorityCost = priorityWork.checked ? 50000 : 0;
   const beforeCoupon = base + privateCost + priorityCost;
   const coupon = couponApplied ? Math.floor(beforeCoupon * 0.2) : 0;
   const final = beforeCoupon - coupon;
 
-  document.getElementById('calcRate').textContent = formatWon(currentCategory.rate);
+  document.getElementById('calcRate').textContent = currentCategory.unit === 'case' ? `${formatWon(currentCategory.rate)} / 건` : `${formatWon(currentCategory.rate)} / 분`;
   document.getElementById('calcBase').textContent = formatWon(base);
   document.getElementById('calcPrivate').textContent = privateCost ? `+ ${formatWon(privateCost)}` : '0원';
   document.getElementById('calcPriority').textContent = priorityCost ? `+ ${formatWon(priorityCost)}` : '0원';
