@@ -1076,13 +1076,36 @@
   }
   .portfolio-feature-bg.empty-thumb,
   .portfolio-card .thumb.empty-thumb {
-    background-image: linear-gradient(135deg, rgba(13,22,48,.92), rgba(42,79,204,.35)) !important;
+    background-image: none !important;
+    background-color: #121a33;
     background-size: cover;
     background-position: center;
   }
+  .portfolio-feature-bg.empty-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 42%, rgba(255,255,255,.08), transparent 44%);
+    pointer-events: none;
+  }
+  .portfolio-card .thumb.empty-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 42%, rgba(255,255,255,.08), transparent 48%);
+    pointer-events: none;
+  }
+  .portfolio-feature[data-cat="broadcast"] .portfolio-feature-bg.empty-thumb,
+  .portfolio-card[data-cat="broadcast"] .thumb.empty-thumb { background-color: #151d37; }
+  .portfolio-feature[data-cat="shorts"] .portfolio-feature-bg.empty-thumb,
+  .portfolio-card[data-cat="shorts"] .thumb.empty-thumb { background-color: #1a1834; }
+  .portfolio-feature[data-cat="animation"] .portfolio-feature-bg.empty-thumb,
+  .portfolio-card[data-cat="animation"] .thumb.empty-thumb { background-color: #191b2f; }
+  .portfolio-feature[data-cat="branded"] .portfolio-feature-bg.empty-thumb,
+  .portfolio-card[data-cat="branded"] .thumb.empty-thumb { background-color: #17202e; }
   .portfolio-card.empty {
     cursor: default;
-    opacity: .58;
+    opacity: .86;
   }
   .portfolio-card.empty:hover {
     transform: none;
@@ -2879,10 +2902,10 @@ const portfolioData = {
     kicker: 'Live Stream',
     title: '방송 하이라이트 편집',
     items: [
-      {title:'오프닝 훅 편집', note:'첫 3초에 시선을 붙잡는 오프닝 구성입니다.', src:'youtube:hs54B0KhB04'},
-      {title:'토크 템포 정리', note:'말맛을 살리면서 호흡을 정리했어요.', src:'youtube:KjrhWvvHbsw'},
-      {title:'리액션 포인트 컷', note:'시청자 반응을 유도하는 리액션 구성.', src:'youtube:fM0MsgsIi_Y'},
-      {title:'하이라이트 모음', note:'핵심 장면을 압축해 재구성했어요.', src:'youtube:rNMruA8YUow'},
+      {title:'오프닝 훅 편집', note:'첫 3초에 시선을 붙잡는 오프닝 구성입니다.', src:''},
+      {title:'토크 템포 정리', note:'말맛을 살리면서 호흡을 정리했어요.', src:''},
+      {title:'리액션 포인트 컷', note:'시청자 반응을 유도하는 리액션 구성.', src:''},
+      {title:'하이라이트 모음', note:'핵심 장면을 압축해 재구성했어요.', src:''},
       {title:'합방 · 멀티 편집', note:'여러 소스를 자연스럽게 교차 구성합니다.', src:''},
       {title:'엔딩 회수형 컷', note:'마무리에 여운을 남기는 구성이에요.', src:''}
     ]
@@ -2891,36 +2914,36 @@ const portfolioData = {
     kicker: 'Shorts',
     title: '쇼츠 편집',
     items: [
-      {title:'첫 1초 후킹형', note:'짧고 강한 도입부 구성이에요.', src:'youtube:OFvi6XFQ-fI', ratio:'vertical'},
-      {title:'강조 자막형', note:'리듬감 있는 자막 편집.', src:'youtube:CCk7Nwshx90', ratio:'vertical'},
-      {title:'리액션 압축형', note:'짧은 호흡으로 압축한 편집.', src:'youtube:8sBJu9Svqz8', ratio:'vertical'},
-      {title:'썸네일 감성 컷', note:'클릭을 부르는 포인트 컷.', src:'youtube:t0CDYm8bfQ4', ratio:'vertical'},
-      {title:'대사 포인트 편집', note:'핵심 문장을 강조한 편집이에요.', src:'youtube:oqThPoAkMuA', ratio:'vertical'},
-      {title:'루프형 엔딩', note:'재시청을 유도하는 구성.', src:'youtube:HrWZlHKFZII', ratio:'vertical'}
+      {title:'첫 1초 후킹형', note:'짧고 강한 도입부 구성이에요.', src:'', ratio:'vertical'},
+      {title:'강조 자막형', note:'리듬감 있는 자막 편집.', src:'', ratio:'vertical'},
+      {title:'리액션 압축형', note:'짧은 호흡으로 압축한 편집.', src:'', ratio:'vertical'},
+      {title:'썸네일 감성 컷', note:'클릭을 부르는 포인트 컷.', src:'', ratio:'vertical'},
+      {title:'대사 포인트 편집', note:'핵심 문장을 강조한 편집이에요.', src:'', ratio:'vertical'},
+      {title:'루프형 엔딩', note:'재시청을 유도하는 구성.', src:'', ratio:'vertical'}
     ]
   },
   animation: {
     kicker: 'Animation',
     title: '애니메이션',
     items: [
-      {title:'컷 연결 중심 연출', note:'무드를 유지하는 부드러운 컷 연결.', src:'youtube:GoliFPOXZvo', ratio:'vertical'},
-      {title:'장면 전환 샘플', note:'연결감 있는 트랜지션 작업입니다.', src:'youtube:h1tDcFi3wJA', ratio:'vertical'},
-      {title:'캐릭터 무드 편집', note:'감정선을 중심으로 한 편집.', src:'youtube:sAR0rbOnZAY', ratio:'vertical'},
-      {title:'타이포 섞인 구성', note:'리듬감 있는 타이포그래피 연출.', src:'youtube:MbCzqYMyin4', ratio:'vertical'},
-      {title:'BGM 타이밍 작업', note:'음악과 호흡을 맞춘 편집이에요.', src:'youtube:65IqBVrokds'},
-      {title:'시퀀스 강조형', note:'임팩트 있는 시퀀스 연출.', src:'youtube:7VbS8rTMuAs'}
+      {title:'컷 연결 중심 연출', note:'무드를 유지하는 부드러운 컷 연결.', src:'', ratio:'vertical'},
+      {title:'장면 전환 샘플', note:'연결감 있는 트랜지션 작업입니다.', src:'', ratio:'vertical'},
+      {title:'캐릭터 무드 편집', note:'감정선을 중심으로 한 편집.', src:'', ratio:'vertical'},
+      {title:'타이포 섞인 구성', note:'리듬감 있는 타이포그래피 연출.', src:'', ratio:'vertical'},
+      {title:'BGM 타이밍 작업', note:'음악과 호흡을 맞춘 편집이에요.', src:''},
+      {title:'시퀀스 강조형', note:'임팩트 있는 시퀀스 연출.', src:''}
     ]
   },
   branded: {
     kicker: 'Branded · Doc',
     title: '기업광고 · 다큐',
     items: [
-      {title:'브랜드 소개 영상', note:'기업 아이덴티티를 담은 구성입니다.', src:'youtube:5RNnnR1rgsk'},
-      {title:'제품 홍보 컷', note:'제품의 매력을 강조한 편집이에요.', src:'youtube:vg-nFcRi9fs'},
-      {title:'서비스 스토리', note:'서비스 가치를 전달하는 내러티브.', src:'youtube:4nBtCJboyh4'},
-      {title:'인터뷰 다큐', note:'인물 중심의 다큐멘터리 편집입니다.', src:'youtube:AP1s6OfsCv4', ratio:'vertical'},
-      {title:'현장 기록 다큐', note:'현장의 공기를 담은 편집이에요.', src:'youtube:wkpODfcpG88'},
-      {title:'브랜드 캠페인', note:'캠페인 메시지를 살린 편집입니다.', src:'youtube:Pm3aVvW_fPM'}
+      {title:'브랜드 소개 영상', note:'기업 아이덴티티를 담은 구성입니다.', src:''},
+      {title:'제품 홍보 컷', note:'제품의 매력을 강조한 편집이에요.', src:''},
+      {title:'서비스 스토리', note:'서비스 가치를 전달하는 내러티브.', src:''},
+      {title:'인터뷰 다큐', note:'인물 중심의 다큐멘터리 편집입니다.', src:'', ratio:'vertical'},
+      {title:'현장 기록 다큐', note:'현장의 공기를 담은 편집이에요.', src:''},
+      {title:'브랜드 캠페인', note:'캠페인 메시지를 살린 편집입니다.', src:''}
     ]
   }
 };
@@ -3156,6 +3179,7 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
   portfolioKicker.textContent = group.kicker;
   portfolioFeatureTag.textContent = `#${String(activePortfolioIndex + 1).padStart(2, "0")}`;
   portfolioFeature.classList.toggle('empty', !hasPlayableMedia(current));
+  portfolioFeature.dataset.cat = activePortfolioCat;
   applyMediaRatio(portfolioFeature, current);
   setMediaThumbnail(portfolioFeatureBg, current);
 
@@ -3163,6 +3187,7 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
   bumpCounter();
 
   portfolioFeature.setAttribute('aria-disabled', hasPlayableMedia(current) ? 'false' : 'true');
+  portfolioProgressBar.style.display = hasPlayableMedia(current) ? '' : 'none';
   portfolioFeature.onclick = () => openModal(current);
   portfolioFeature.onkeydown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -3176,6 +3201,7 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
     const card = document.createElement('button');
     card.type = 'button';
     card.className = 'portfolio-card' + (idx === activePortfolioIndex ? ' active' : '') + (!hasPlayableMedia(item) ? ' empty' : '');
+    card.dataset.cat = activePortfolioCat;
     if (categoryChanged) card.classList.add('enter');
     card.style.animationDelay = categoryChanged ? (idx * 0.07) + 's' : '';
     card.setAttribute('aria-label', `${item.title} 선택`);
@@ -3189,16 +3215,15 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
     // Click: select and play immediately inside the featured portfolio area
     card.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (!hasPlayableMedia(item)) return;
       closePortfolioPlayer(false);
       activePortfolioIndex = idx;
       renderPortfolioStage(true);
-      window.setTimeout(() => openModal(item), 0);
+      if (hasPlayableMedia(item)) window.setTimeout(() => openModal(item), 0);
     });
 
     // Hover: preview in featured slot (no commit)
     card.addEventListener('mouseenter', () => {
-      if (idx === activePortfolioIndex || !hasPlayableMedia(item)) return;
+      if (idx === activePortfolioIndex) return;
       card.classList.add('preview');
       previewFeatureItem(item);
       pauseAutoplay();
@@ -3212,7 +3237,7 @@ function renderPortfolioStage(animate = false, categoryChanged = false){
     portfolioTrack.appendChild(card);
   });
 
-  if (animate) startAutoplay();
+  if (animate && group.items.some(hasPlayableMedia)) startAutoplay();
 }
 
 /* Preview helpers (hover on thumb shows different image without changing state) */
